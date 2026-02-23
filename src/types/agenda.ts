@@ -18,58 +18,50 @@ export const DEFAULT_AGENDA: AgendaData = {
     {
       diaSemana: "SEG",
       titulo: "Sala de Oração",
-      data: "24 Fev",
+      data: "02 Mar",
       horario: "20:30",
       local: "Via Zoom",
       cor: "primaria"
     },
     {
-      diaSemana: "TER",
-      titulo: "Culto de Ensino",
-      data: "25 Fev",
-      horario: "19:30",
-      local: "Templo Principal",
-      cor: "secundaria"
-    },
-    {
       diaSemana: "QUA",
-      titulo: "Célula em Casa",
-      data: "26 Fev",
-      horario: "20:00",
-      local: "Diversos Lares",
-      cor: "primaria"
+      titulo: "Família em Oração",
+      data: "04 Mar",
+      horario: "20:30",
+      local: "Na Igreja",
+      cor: "secundaria"
     },
     {
       diaSemana: "QUI",
-      titulo: "Ensaio do Louvor",
-      data: "27 Fev",
-      horario: "19:30",
-      local: "Templo Principal",
-      cor: "secundaria"
+      titulo: "Pequena Família",
+      data: "05 Mar",
+      horario: "20:30",
+      local: "Nas Casas",
+      cor: "primaria"
     },
     {
       diaSemana: "SEX",
-      titulo: "Capão Jovem",
-      data: "28 Fev",
-      horario: "20:00",
-      local: "Salão Social",
-      cor: "#4A7C59"
+      titulo: "Pequena Família",
+      data: "06 Mar",
+      horario: "20:30",
+      local: "Nas Casas",
+      cor: "primaria"
+    },
+    {
+      diaSemana: "SAB",
+      titulo: "Encontro de Mulheres",
+      data: "07 Mar",
+      horario: "18:00",
+      local: "Na Igreja",
+      cor: "secundaria"
     },
     {
       diaSemana: "DOM",
       titulo: "Culto da Família",
-      data: "02 Mar",
-      horario: "09:00",
-      local: "Templo Principal",
-      cor: "primaria"
-    },
-    {
-      diaSemana: "DOM",
-      titulo: "Culto da Noite",
-      data: "02 Mar",
+      data: "08 Mar",
       horario: "18:00",
-      local: "Templo Principal",
-      cor: "secundaria"
+      local: "Na Igreja",
+      cor: "primaria"
     }
   ]
 };

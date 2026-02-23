@@ -1,0 +1,42 @@
+.story-preview{
+    position: absolute;
+    overflow: hidden;
+    font-family: "'Nunito Sans', sans-serif";
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,  rgba(31, 9, 0, 0.4) 0%, rgba(31, 9, 0, 0.4) 100%);
+}
+
+.content-wrapper{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.events-section{
+    margin-left: 130px;
+    margin-top: auto;
+    margin-bottom: 60px;
+    
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20.4px);
+    -webkit-backdrop-filter: blur(20.4px);
+    border: 4px solid rgba(255, 255, 255, 1);
+    border-radius: 32px;
+
+    padding: 30px 120px 30px 60px ;
+
+    backdrop-filter: blur(10px);
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,38 +1,17 @@
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import html2canvas from "html2canvas";
 import JsonEditor from "@/components/JsonEditor";
-import StoryPreview from "@/components/StoryPreview";
-import { DEFAULT_AGENDA, type AgendaData } from "@/types/agenda";
-
-function parseAgenda(text: string): { data: AgendaData | null; error: string | null } {
-  try {
-    const parsed = JSON.parse(text);
-    if (!parsed.backgroundImage || typeof parsed.backgroundImage !== "string") {
-      return { data: null, error: "Campo 'backgroundImage' é obrigatório (string)." };
-    }
-    if (!Array.isArray(parsed.events) || parsed.events.length === 0) {
-      return { data: null, error: "Campo 'events' precisa ser um array com pelo menos 1 evento." };
-    }
-    for (let i = 0; i < parsed.events.length; i++) {
-      const ev = parsed.events[i];
-      const fields = ["diaSemana", "titulo", "data", "horario", "local", "cor"];
-      for (const f of fields) {
-        if (!ev[f] || typeof ev[f] !== "string") {
-          return { data: null, error: `Evento ${i + 1}: campo '${f}' ausente ou inválido.` };
-        }
-      }
-    }
-    return { data: parsed as AgendaData, error: null };
-  } catch (e: any) {
-    return { data: null, error: e.message };
-  }
-}
+import StoryPreview from "@/components/StoryPreview/StoryPreview";
+import { DEFAULT_AGENDA } from "@/types/agenda";
+import { parseAgenda } from "@/lib/utils";
 
 const Index = () => {
   const [jsonText, setJsonText] = useState(() => JSON.stringify(DEFAULT_AGENDA, null, 2));
   const [exporting, setExporting] = useState(false);
-  const previewRef = useRef<HTMLDivElement>(null);
+  const [previewSize] = useState({ width: 1080, height: 1920 });
+  const [base64Image, setBase64Image] = useState<string | null>(null);
 
+  const previewRef = useRef<HTMLDivElement>(null);
   const { data, error } = useMemo(() => parseAgenda(jsonText), [jsonText]);
 
   const handleExport = useCallback(async () => {
@@ -40,12 +19,10 @@ const Index = () => {
     setExporting(true);
     try {
       const canvas = await html2canvas(previewRef.current, {
-        width: 1080,
-        height: 1920,
-        scale: 1,
+        scale: 4,
         useCORS: true,
         allowTaint: false,
-        backgroundColor: "#1a1a2e",
+        backgroundColor: "#000000", // transparente
       });
       const link = document.createElement("a");
       link.download = "agenda-semanal.png";
@@ -56,26 +33,44 @@ const Index = () => {
     } finally {
       setExporting(false);
     }
-  }, [data]);
+  }, [data, previewSize]);
+
+  const convertFileToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      setBase64Image(base64String);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
-    <div className="min-h-screen bg-muted/40 p-6">
-
-      <header className="mb-6 text-center">
+    <div className="dark h-screen bg-gray-800 bg-muted/40">
+      <header className="text-center p-8">
         <h1
-          className="text-2xl font-bold text-foreground"
-          style={{ fontFamily: "'Quicksand', sans-serif" }}
+          className="text-3xl sm:text-2xl font-bold text-foreground"
+          style={{ fontFamily: "'Nunito Sans', sans-serif" }}
         >
           Gerador de Agenda Semanal
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Edite o JSON e exporte a imagem para o Instagram Stories
-        </p>
+        <p className="text-sm text-muted-foreground">Edite o JSON e exporte a imagem.</p>
       </header>
 
-      <div className="flex gap-6 max-w-[1600px] mx-auto" style={{ minHeight: "calc(100vh - 140px)" }}>
-        {/* Left: Editor */}
-        <div className="w-[420px] shrink-0">
+      <div className="flex gap-6 max-w-[1600px] mx-auto p-6 border-sky-900 border-2 border-solid rounded-lg overflow-hidden relative">
+        <div className="w-[480px] shrink-0">
+          <form>
+            <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
+              Local background image (opcional):
+            </h2>
+            <input
+              type="file"
+              onChange={convertFileToBase64}
+              className="flex-1 mb-4 w-full rounded-lgborder-input bg-card text-foreground px-4 py-3 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </form>
+
           <JsonEditor
             jsonText={jsonText}
             onJsonChange={setJsonText}
@@ -86,18 +81,15 @@ const Index = () => {
           />
         </div>
 
-        {/* Right: Preview (scaled) */}
-        <div className="flex-1 flex items-start justify-center overflow-auto">
-          <div
-            style={{
-              width: 1080,
-              height: 1920,
-              transform: "scale(0.42)",
-              transformOrigin: "top center",
-            }}
-          >
-            <StoryPreview data={data} previewRef={previewRef} />
-          </div>
+        <div
+          className="flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative"
+        >
+          <StoryPreview
+            data={data}
+            previewSize={previewSize}
+            base64Image={base64Image}
+            previewRef={previewRef}
+          />
         </div>
       </div>
     </div>
