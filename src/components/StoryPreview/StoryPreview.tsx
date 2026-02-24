@@ -62,7 +62,7 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
       className="story-preview"
       ref={previewRef}
       style={{
-        transformOrigin: "top center",
+        transformOrigin: windowSize.width < 700 ? "top left" : "top center",
         transform: `scale(${windowSize.width < 1800 ? 0.35 : 0.45})`,
         width: previewSize.width,
         height: previewSize.height,

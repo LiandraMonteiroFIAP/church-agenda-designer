@@ -33,7 +33,7 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
   }, [jsonText]);
 
   return (
-    <div className="flex flex-col h-[75vh] sm:h-[70vh] gap-4">
+    <div className="json-editor-container flex flex-col h-[75vh] sm:h-[70vh] gap-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">Editor JSON</h2>
         <div className="flex items-center gap-2">

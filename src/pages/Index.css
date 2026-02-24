@@ -1,0 +1,34 @@
+
+
+@media screen and (max-width: 640px) {
+    .page-index{
+        height: auto !important;
+        padding: 10px !important;
+    }
+    
+    .gerador-container {
+        display: flex;
+        flex-direction: column !important;
+        height: stretch !important;
+    }
+
+    .editor-container {
+        width: 100% !important;
+        height: fit-content;
+    }
+    
+    .json-editor-container {
+        height: 60vh !important;
+    } 
+
+    .preview-container {
+        display: block;
+        width: 380px!important;
+        height: 675px !important;
+        overflow: visible !important;
+        flex-grow: unset !important;
+        flex-shrink: unset !important;
+        flex-basis: unset !important;
+        border: none !important;
+    }
+}

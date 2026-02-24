@@ -4,9 +4,12 @@ import JsonEditor from "@/components/JsonEditor";
 import StoryPreview from "@/components/StoryPreview/StoryPreview";
 import { DEFAULT_AGENDA } from "@/types/agenda";
 import { parseAgenda } from "@/lib/utils";
+import './Index.css';
 
 const Index = () => {
-  const [jsonText, setJsonText] = useState(() =>  localStorage.getItem("agendaData") || JSON.stringify(DEFAULT_AGENDA, null, 2));
+  const [jsonText, setJsonText] = useState(
+    () => localStorage.getItem("agendaData") || JSON.stringify(DEFAULT_AGENDA, null, 2),
+  );
   const [exporting, setExporting] = useState(false);
   const [previewSize] = useState({ width: 1080, height: 1920 });
   const [base64Image, setBase64Image] = useState<string | null>(null);
@@ -47,7 +50,7 @@ const Index = () => {
   };
 
   return (
-    <div className="dark h-screen bg-slate-900 bg-muted/40">
+    <div className="page-index dark lg:h-screen bg-slate-900 bg-muted/40">
       <header className="text-center p-8">
         <h1
           className="text-3xl sm:text-2xl font-bold text-foreground"
@@ -58,8 +61,8 @@ const Index = () => {
         <p className="text-sm text-muted-foreground">Edite o JSON e exporte a imagem.</p>
       </header>
 
-      <div className="flex gap-6 max-w-[1600px] mx-auto p-6 border-sky-900 border-2 border-solid rounded-lg overflow-hidden relative">
-        <div className="w-[480px] shrink-0">
+      <div className="gerador-container flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-sky-900 border-2 border-solid rounded-lg overflow-hidden relative">
+        <div className="editor-container w-[480px] shrink-0 ">
           <form>
             <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
               Local background image (opcional):
@@ -81,9 +84,7 @@ const Index = () => {
           />
         </div>
 
-        <div
-          className="flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative"
-        >
+        <div className="preview-container flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative">
           <StoryPreview
             data={data}
             previewSize={previewSize}
