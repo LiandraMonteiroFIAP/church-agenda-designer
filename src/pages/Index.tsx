@@ -6,7 +6,7 @@ import { DEFAULT_AGENDA } from "@/types/agenda";
 import { parseAgenda } from "@/lib/utils";
 
 const Index = () => {
-  const [jsonText, setJsonText] = useState(() => JSON.stringify(DEFAULT_AGENDA, null, 2));
+  const [jsonText, setJsonText] = useState(() =>  localStorage.getItem("agendaData") || JSON.stringify(DEFAULT_AGENDA, null, 2));
   const [exporting, setExporting] = useState(false);
   const [previewSize] = useState({ width: 1080, height: 1920 });
   const [base64Image, setBase64Image] = useState<string | null>(null);

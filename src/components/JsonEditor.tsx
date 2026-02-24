@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Download, AlertCircle, CheckCircle2 } from "lucide-react";
@@ -20,12 +20,22 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
   onExport,
   exporting,
 }) => {
+  useEffect(() => {
+
+    if (isValid) {
+      try {
+        const parsed = JSON.parse(jsonText);
+        localStorage.setItem("agendaData", JSON.stringify(parsed, null, 2));
+      } catch (e) {
+        console.error("Error saving to localStorage:", e);
+      }
+    }
+  }, [jsonText]);
+
   return (
     <div className="flex flex-col h-[75vh] sm:h-[70vh] gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
-          Editor JSON
-        </h2>
+        <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">Editor JSON</h2>
         <div className="flex items-center gap-2">
           {isValid ? (
             <span className="flex items-center gap-1 text-sm text-green-600">
@@ -50,9 +60,7 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
       {error && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="font-mono text-xs">
-            {error}
-          </AlertDescription>
+          <AlertDescription className="font-mono text-xs">{error}</AlertDescription>
         </Alert>
       )}
 

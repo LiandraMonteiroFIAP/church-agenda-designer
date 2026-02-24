@@ -62,7 +62,7 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
       ref={previewRef}
       style={{
         transformOrigin: "top center",
-        transform: `scale(${windowSize.width < 1800 ? 0.35 : 0.50})`,
+        transform: `scale(${windowSize.width < 1800 ? 0.35 : 0.45})`,
         width: previewSize.width,
         height: previewSize.height,
         backgroundImage: base64Image ? `url(${base64Image})` : `url(${data.backgroundImage})`,
