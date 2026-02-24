@@ -6,6 +6,7 @@ import { ImageTitle } from "../static-ui/ImageTitle";
 import { FooterPNG } from "../static-ui/Footer";
 import { DayBadge } from "../static-ui/DayBadge";
 import { EventItem } from "../static-ui/EventItem";
+import { CircularText } from "../static-ui/CircularText";
 
 interface StoryPreviewProps {
   data: AgendaData | null;
@@ -68,6 +69,7 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
         backgroundImage: base64Image ? `url(${base64Image})` : `url(${data.backgroundImage})`,
       }}
     >
+      <CircularText />
       <div className="overlay" />
 
       <div className="content-wrapper">
