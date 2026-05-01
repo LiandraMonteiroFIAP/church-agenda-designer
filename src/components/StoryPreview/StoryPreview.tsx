@@ -27,17 +27,8 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
     height: window.innerHeight,
   });
 
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center h-full text-muted-foreground">
-        JSON inválido — corrija para ver o preview
-      </div>
-    );
-  }
-
-  // Group events: show badge only for first event of each day
   const seenDays = new Set<string>();
-  const eventsWithBadge = data.events.map((ev) => {
+  const eventsWithBadge = data?.events.map((ev) => {
     const showBadge = !seenDays.has(ev.diaSemana);
     seenDays.add(ev.diaSemana);
     return { ...ev, showBadge };
@@ -56,6 +47,14 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if (data === null || !data) {
+    return (
+      <div className="flex items-center justify-center h-full text-muted-foreground">
+        JSON inválido — corrija para ver o preview
+      </div>
+    );
+  }
 
   return (
     <div
@@ -88,7 +87,7 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
         <FooterPNG />
       </div>
     </div>
-  );
+  )
 };
 
 export default StoryPreview;

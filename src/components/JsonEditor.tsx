@@ -21,7 +21,6 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
   exporting,
 }) => {
   useEffect(() => {
-
     if (isValid) {
       try {
         const parsed = JSON.parse(jsonText);
