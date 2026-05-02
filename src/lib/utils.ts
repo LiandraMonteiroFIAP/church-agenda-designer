@@ -38,3 +38,15 @@ export function parseAgenda(text: string): { data: AgendaData | null; error: str
     return { data: null, error: e.message };
   }
 }
+
+export function parseEstatico(text: string): { data: any | null; error: string | null } {
+  try {
+    const parsed = JSON.parse(text);
+    if (!parsed.backgroundImage || typeof parsed.backgroundImage !== "string") {
+      return { data: null, error: "Campo 'backgroundImage' é obrigatório (string)." };
+    }
+    return { data: parsed, error: null };
+  } catch (e: any) {
+    return { data: null, error: e.message };
+  } 
+}

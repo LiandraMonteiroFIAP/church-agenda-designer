@@ -1,21 +1,21 @@
+import "./style.css";
 import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import html2canvas from "html2canvas";
 import JsonEditor from "@/components/JsonEditor";
-import StoryPreview from "@/components/StoryPreview/StoryPreview";
-import { DEFAULT_AGENDA } from "@/types/agenda";
-import { parseAgenda } from "@/lib/utils";
-import "./style.css";
+import { DEFAULT_ESTATICO } from "@/types/estatico";
+import { parseAgenda, parseEstatico } from "@/lib/utils";
+import EstaticosTemplate from "@/components/EstaticosTemplate/EstaticosTemplate";
 
 const Estaticos = () => {
     const [jsonText, setJsonText] = useState(
-        () => localStorage.getItem("agendaData") || JSON.stringify(DEFAULT_AGENDA, null, 2),
+        () => localStorage.getItem("estaticoData") || JSON.stringify(DEFAULT_ESTATICO, null, 2),
     );
     const [exporting, setExporting] = useState(false);
     const [previewSize] = useState({ width: 1080, height: 1920 });
     const [base64Image, setBase64Image] = useState<string | null>(null);
 
     const previewRef = useRef<HTMLDivElement>(null);
-    const { data, error } = useMemo(() => parseAgenda(jsonText), [jsonText]);
+    const { data, error } = useMemo(() => parseEstatico(jsonText), [jsonText]);
 
 
     const handleExport = useCallback(async () => {
@@ -29,7 +29,7 @@ const Estaticos = () => {
                 backgroundColor: "#000000", // transparente
             });
             const link = document.createElement("a");
-            link.download = "agenda-semanal.png";
+            link.download = "estatico.png";
             link.href = canvas.toDataURL("image/png");
             link.click();
         } catch (err) {
@@ -51,7 +51,7 @@ const Estaticos = () => {
     };
 
     return (
-        <div className="page-index dark lg:h-screen bg-slate-900 bg-muted/40">
+        <div className="page-index dark lg:h-screen bg-stone-900 bg-muted/40">
             <header className="text-center p-8">
                 <h1
                     className="text-3xl sm:text-2xl font-bold text-foreground"
@@ -62,7 +62,7 @@ const Estaticos = () => {
                 <p className="text-sm text-muted-foreground">Edite o JSON e exporte a imagem.</p>
             </header>
 
-            <div className="gerador-container flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-sky-900 border-2 border-solid rounded-lg overflow-hidden relative">
+            <div className="gerador-container flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-stone-600 border-2 border-solid rounded-lg overflow-hidden relative">
                 <div className="editor-container w-[480px] shrink-0 ">
                     <form>
                         <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
@@ -76,6 +76,7 @@ const Estaticos = () => {
                     </form>
 
                     <JsonEditor
+                        localStorageKey={"estaticoData"}
                         jsonText={jsonText}
                         onJsonChange={setJsonText}
                         isValid={!!data}
@@ -85,8 +86,8 @@ const Estaticos = () => {
                     />
                 </div>
 
-                <div className="preview-container flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative">
-                    <StoryPreview
+                <div className="preview-container flex-1 border-2 border-stone-600 border-solid rounded-lg overflow-hidden relative">
+                    <EstaticosTemplate
                         data={data}
                         previewSize={previewSize}
                         base64Image={base64Image}

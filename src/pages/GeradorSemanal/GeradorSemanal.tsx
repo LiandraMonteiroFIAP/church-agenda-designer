@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import html2canvas from "html2canvas";
 import JsonEditor from "@/components/JsonEditor";
-import StoryPreview from "@/components/StoryPreview/StoryPreview";
+import StoryPreview from "@/components/AgendaSemanalTemplate/AgendaSemanalTemplate";
 import { DEFAULT_AGENDA } from "@/types/agenda";
 import { parseAgenda } from "@/lib/utils";
 import "./style.css";
@@ -16,7 +16,6 @@ const GeradorSemanal = () => {
 
     const previewRef = useRef<HTMLDivElement>(null);
     const { data, error } = useMemo(() => parseAgenda(jsonText), [jsonText]);
-
 
     const handleExport = useCallback(async () => {
         if (!previewRef.current || !data) return;
@@ -76,6 +75,7 @@ const GeradorSemanal = () => {
                     </form>
 
                     <JsonEditor
+                        localStorageKey={"agendaData"}
                         jsonText={jsonText}
                         onJsonChange={setJsonText}
                         isValid={!!data}

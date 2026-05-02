@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./story-preview.style.css";
+import "./style.css";
 import type { AgendaData } from "@/types/agenda";
 import { TopVerse } from "../static-ui/TopVerse";
 import { ImageTitle } from "../static-ui/ImageTitle";
@@ -8,14 +8,14 @@ import { DayBadge } from "../static-ui/DayBadge";
 import { EventItem } from "../static-ui/EventItem";
 import { CircularText } from "../static-ui/CircularText";
 
-interface StoryPreviewProps {
+interface AgendaSemanalTemplateProps {
   data: AgendaData | null;
   previewSize: { width: number; height: number };
   base64Image?: string | null;
   previewRef: React.RefObject<HTMLDivElement>;
 }
 
-const StoryPreview: React.FC<StoryPreviewProps> = ({
+const AgendaSemanalTemplate: React.FC<AgendaSemanalTemplateProps> = ({
   data,
   previewSize,
   base64Image,
@@ -90,4 +90,4 @@ const StoryPreview: React.FC<StoryPreviewProps> = ({
   )
 };
 
-export default StoryPreview;
+export default AgendaSemanalTemplate;

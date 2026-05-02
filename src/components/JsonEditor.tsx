@@ -4,6 +4,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Download, AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface JsonEditorProps {
+  localStorageKey: string;
   jsonText: string;
   onJsonChange: (text: string) => void;
   isValid: boolean;
@@ -19,12 +20,13 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
   error,
   onExport,
   exporting,
+  localStorageKey
 }) => {
   useEffect(() => {
     if (isValid) {
       try {
         const parsed = JSON.parse(jsonText);
-        localStorage.setItem("agendaData", JSON.stringify(parsed, null, 2));
+        localStorage.setItem(localStorageKey, JSON.stringify(parsed, null, 2));
       } catch (e) {
         console.error("Error saving to localStorage:", e);
       }

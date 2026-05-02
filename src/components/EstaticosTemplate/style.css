@@ -1,0 +1,53 @@
+.estatico-preview{
+    position: absolute;
+    overflow: hidden;
+    font-family: "'Nunito Sans', sans-serif";
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-position: contain;
+    background-repeat: no-repeat;
+}
+
+.content-wrapper{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rounded-border{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 1000px;
+    border: 6px solid rgba(255, 255, 255, 1);
+    border-radius: 48px;
+    padding: 50px 30px 5px 60px;
+}
+
+.logo{
+    width:220px;
+    height: auto;
+}
+
+.estatico-header{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.estatico-endereco{
+    position: absolute;
+    bottom: 0;
+    right: 25px;
+}
