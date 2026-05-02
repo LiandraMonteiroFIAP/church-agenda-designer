@@ -17,7 +17,7 @@ export const TextoEstatico = ({ type, text, outlined, variant, size }: TextoEsta
                 justifyContent: "start",
                 paddingLeft: "20px",
                 paddingBottom: type === "corpo" ? "10px" : "0",
-                borderLeft: outlined ? "6px solid white" : "none",
+                borderLeft: outlined ? "6px solid white" : "none"
             }}
         >
             <p
