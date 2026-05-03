@@ -50,7 +50,7 @@ const GeradorSemanal = () => {
     };
 
     return (
-        <div className="page-index dark lg:h-screen bg-slate-900 bg-muted/40">
+        <div className="page-index dark min-h-screen bg-slate-900 bg-muted/40">
             <header className="text-center p-8">
                 <h1
                     className="text-3xl sm:text-2xl font-bold text-foreground"

@@ -18,7 +18,7 @@ export const Bolinha = ({ ministerio, tituloDoEvento }: BolinhaProps) => {
                 transform: 'translate(-10%, -73%)',
                 width: tamanhoBolinha,
                 height: tamanhoBolinha,
-                backgroundImage: `url("/src/placeholders/bolinhas/${ministerio}.png")`,
+                backgroundImage: `url("assets/bolinhas/${ministerio}.png")`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 marginRight: "10px",

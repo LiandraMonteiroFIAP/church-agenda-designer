@@ -10,16 +10,16 @@ export const TextoEstatico = ({ type, text, outlined, variant, size }: TextoEsta
     return (
         <div
             style={{
+                position: "relative",
                 textAlign: "left",
                 width: "100%",
                 display: "flex",
-                alignItems: "start",
+                alignItems: "center",
                 justifyContent: "start",
-                paddingLeft: "20px",
-                paddingBottom: type === "corpo" ? "10px" : "0",
-                borderLeft: outlined ? "6px solid white" : "none"
             }}
         >
+            {outlined && (<div style={{position: "absolute",backgroundColor: "white", width: "7px", height: "80px", top: "5px"}}> | </div>)}
+
             <p
                 style={{
                     color: "white",
@@ -27,8 +27,9 @@ export const TextoEstatico = ({ type, text, outlined, variant, size }: TextoEsta
                     fontFamily: "'Nunito Sans', sans-serif",
                     fontWeight: variant === "bold" ? 700 : 300,
                     letterSpacing: type === "descricao" ? "-2px" : "-4px",
-                    lineHeight: size === "large" ? "80px" : size === "medium" ? "85px" : "120px",
-                    marginTop: type === "corpo"? "-5%" : 0,
+                    lineHeight: size === "large" ? "80px" : size === "medium" ? "140px" : "100px",
+                    paddingLeft: "25px",
+                    marginTop: type === "corpo" ? "-18%" : "-5%",
                 }}
             >
                 {type === "titulo" && (

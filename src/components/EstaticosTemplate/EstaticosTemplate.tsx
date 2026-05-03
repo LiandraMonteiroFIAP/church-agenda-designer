@@ -6,7 +6,6 @@ import { FooterPNG } from "../static-ui/Footer";
 import { CircularText } from "../static-ui/CircularText";
 import { TextoEstatico } from "../static-ui/TextoEstatico";
 import { Bolinha } from "../static-ui/Bolinha";
-import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 
 interface EstaticosTemplateProps {
   data: EstaticoEvent | null;
@@ -58,13 +57,13 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
         transform: `scale(${windowSize.width < 1800 ? 0.35 : 0.45})`,
         width: previewSize.width,
         height: previewSize.height,
-        backgroundImage: base64Image ? `url(${base64Image})` : `url(/src/placeholders/estatico-placeholder.JPG)`,
+        backgroundImage: base64Image ? `url(${base64Image})` : `url(${data.backgroundImage})`,
       }}
     > 
       <CircularText />
       <div className="overlay" 
         style={{ 
-          backgroundImage: `url("/src/placeholders/paredes/${data?.ministerio}.png")`,
+          backgroundImage: `url("/assets/paredes/${data?.ministerio}.png")`,
           opacity: data?.opacidade ? data.opacidade : 1 || data?.opacidade === 0 ? 0 : 1,
         }} 
       />
@@ -80,7 +79,7 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
               <TextoEstatico type="corpo" size="medium" text={data?.local} />
               <TextoEstatico type="descricao" size="small" text={data?.descricao} />
             </div>            
-            <img className="logo" src="src\placeholders\estatico-logo.png" alt="" />
+            <img className="logo" src="assets/estatico-logo.png" alt="" />
           </div>
 
           <div className="bolinha-container">

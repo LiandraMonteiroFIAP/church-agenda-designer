@@ -2,8 +2,8 @@ import "./style.css";
 import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import html2canvas from "html2canvas";
 import JsonEditor from "@/components/JsonEditor";
-import { DEFAULT_ESTATICO } from "@/types/estatico";
-import { parseAgenda, parseEstatico } from "@/lib/utils";
+import { DEFAULT_ESTATICO, TEMPLATES_DEFAULT } from "@/types/estatico";
+import { parseEstatico } from "@/lib/utils";
 import EstaticosTemplate from "@/components/EstaticosTemplate/EstaticosTemplate";
 
 const Estaticos = () => {
@@ -16,7 +16,6 @@ const Estaticos = () => {
 
     const previewRef = useRef<HTMLDivElement>(null);
     const { data, error } = useMemo(() => parseEstatico(jsonText), [jsonText]);
-
 
     const handleExport = useCallback(async () => {
         if (!previewRef.current || !data) return;
@@ -51,19 +50,41 @@ const Estaticos = () => {
     };
 
     return (
-        <div className="page-index dark lg:h-screen bg-stone-900 bg-muted/40">
+        <div className="page-index min-h-screen dark bg-stone-900 bg-muted/40">
             <header className="text-center p-8">
                 <h1
                     className="text-3xl sm:text-2xl font-bold text-foreground"
                     style={{ fontFamily: "'Nunito Sans', sans-serif" }}
                 >
-                    Gerador de Agenda Semanal
+                    Gerador de Estático de Eventos
                 </h1>
                 <p className="text-sm text-muted-foreground">Edite o JSON e exporte a imagem.</p>
             </header>
 
-            <div className="gerador-container flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-stone-600 border-2 border-solid rounded-lg overflow-hidden relative">
+            <div className="gerador-container h-full flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-stone-600 border-2 border-solid rounded-lg relative">
                 <div className="editor-container w-[480px] shrink-0 ">
+                    <div>
+                        <h2 className="text-lg font-semibold font-[Quicksand] text-foreground mb-2">
+                            Presets:
+                        </h2>
+                        <div className="flex gap-2 mb-6">
+                            {TEMPLATES_DEFAULT.map((template, index) => {
+                                const isSelected = jsonText === JSON.stringify(template, null, 2);
+                                return (
+                                    <button
+                                        key={index}
+                                        onClick={() =>
+                                            setJsonText(JSON.stringify(template, null, 2))
+                                        }
+                                        className={`block text-size text-center px-2 py-2 mb-2 rounded-lg border text-foreground border-stone-400 ${isSelected ? "bg-stone-700" : "hover:bg-stone-700"}`}
+                                    >
+                                        {template.titulo}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
                     <form>
                         <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
                             Local background image (opcional):
