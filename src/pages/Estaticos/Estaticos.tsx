@@ -1,10 +1,11 @@
 import "./style.css";
-import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 import html2canvas from "html2canvas";
 import JsonEditor from "@/components/JsonEditor";
 import { DEFAULT_ESTATICO, TEMPLATES_DEFAULT } from "@/types/estatico";
-import { parseEstatico } from "@/lib/utils";
+import { parseEstatico, convertFileToBase64 } from "@/lib/utils";
 import EstaticosTemplate from "@/components/EstaticosTemplate/EstaticosTemplate";
+
 
 const Estaticos = () => {
     const [jsonText, setJsonText] = useState(
@@ -37,17 +38,6 @@ const Estaticos = () => {
             setExporting(false);
         }
     }, [data, previewSize]);
-
-    const convertFileToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64String = reader.result as string;
-            setBase64Image(base64String);
-        };
-        reader.readAsDataURL(file);
-    };
 
     return (
         <div className="page-index min-h-screen dark bg-stone-900 bg-muted/40">
@@ -91,7 +81,7 @@ const Estaticos = () => {
                         </h2>
                         <input
                             type="file"
-                            onChange={convertFileToBase64}
+                            onChange={(e) => {convertFileToBase64(e, setBase64Image)}} 
                             className="flex-1 mb-4 w-full rounded-lgborder-input bg-card text-foreground px-4 py-3 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
                         />
                     </form>

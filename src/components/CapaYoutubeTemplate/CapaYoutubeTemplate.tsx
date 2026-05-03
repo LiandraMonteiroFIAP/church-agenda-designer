@@ -1,20 +1,18 @@
 import "./style.css";
 import React, { useState, useEffect } from "react";
-import type { EstaticoEvent } from "@/types/estatico";
-import { TopVerse } from "../static-ui/TopVerse";
+import type { CapaYoutubeData } from "@/types/capayoutube";
 import { FooterPNG } from "../static-ui/Footer";
 import { CircularText } from "../static-ui/CircularText";
 import { TextoEstatico } from "../static-ui/TextoEstatico";
-import { Bolinha } from "../static-ui/Bolinha";
 
-interface EstaticosTemplateProps {
-  data: EstaticoEvent | null;
+interface CapaYoutubeTemplateProps {
+  data: CapaYoutubeData | null;
   previewSize: { width: number; height: number };
   base64Image?: string | null;
   previewRef: React.RefObject<HTMLDivElement>;
 }
 
-const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
+const CapaYoutubeTemplate: React.FC<CapaYoutubeTemplateProps> = ({
   data,
   previewSize,
   base64Image,
@@ -50,7 +48,7 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
 
   return (
     <div
-      className="estatico-preview"
+      className="capa-ytb-preview"
       ref={previewRef}
       style={{
         transformOrigin: windowSize.width < 700 ? "top left" : "top center",
@@ -62,41 +60,29 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
     > 
       <CircularText />
       <div className="overlay" 
-        style={{ 
-          backgroundImage: `url("/assets/paredes/${data?.ministerio}.png")`,
+        style={{
+          background:`radial-gradient(circle, transparent 0%, ${data?.cor || '#005aa9'} 100%)`,
           opacity: data?.opacidade ? data.opacidade : 1 || data?.opacidade === 0 ? 0 : 1,
         }} 
       />
 
+      <div className="big-circle"></div>
+
       <div className="content-wrapper">
-        <TopVerse />
-
-        <div className="rounded-border">
-          <div className="estatico-header">
-            <div className="estatico-header-infos">
-              <TextoEstatico type="corpo" size="medium" text={data?.diaSemana }  variant="bold" outlined />
-              <TextoEstatico type="corpo" size="medium" text={data?.horario } outlined />
-              <TextoEstatico type="corpo" size="medium" text={data?.local} />
-              <TextoEstatico type="descricao" size="small" text={data?.descricao} />
-            </div>   
-
-            {data?.ministerio === "geral" && (
+        {data?.ministerio === "geral" && (
               <img className="logo" src="assets/estatico-logo.png" alt="" /> )}         
-            {data?.ministerio === "jovens" && (
-              <img className="logo" src="assets/logo-capaojovem.png" alt="" /> )}         
-          </div>
-
-          <div className="bolinha-container">
-              <Bolinha 
-                ministerio={data?.ministerio || "geral"} 
-                tituloDoEvento={data?.titulo || ""} />
-              {
-                data?.tipo === "presencial" && (
-                  <div className="estatico-endereco">
-                    <TextoEstatico type="descricao" size="small" text="Rua Anum Dourado, 75"/>
-                  </div>
-                )
-              }
+        {data?.ministerio === "jovens" && (
+              <img className="logo" src="assets/logo-capaojovem.png" alt="" /> )}
+              
+        <div className="titulo-container">
+          {data.titulo.map((text, i) => {
+            return <p 
+              className={`titulo-text ${data.titulo.length === i+1? "bold" : ""}`} 
+              key={i}>{text}
+            </p>
+          })}
+          <div className="ministro-container">
+            <p>{data?.ministro}</p>
           </div>
         </div>
         <FooterPNG />
@@ -105,4 +91,4 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
   )
 };
 
-export default EstaticosTemplate;
+export default CapaYoutubeTemplate;

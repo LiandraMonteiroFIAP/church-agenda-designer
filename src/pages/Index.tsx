@@ -17,6 +17,12 @@ const Index = () => {
                 >
                     Estáticos
                 </a>
+                <a
+                    href="/capa-youtube"
+                    className="mt-4 inline-block rounded bg-white px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-100"
+                >
+                    Capa para YouTube
+                </a>
             </MenubarGroup>
         </div>
     );

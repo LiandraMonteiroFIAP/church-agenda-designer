@@ -27,9 +27,9 @@ export const TextoEstatico = ({ type, text, outlined, variant, size }: TextoEsta
                     fontFamily: "'Nunito Sans', sans-serif",
                     fontWeight: variant === "bold" ? 700 : 300,
                     letterSpacing: type === "descricao" ? "-2px" : "-4px",
-                    lineHeight: size === "large" ? "80px" : size === "medium" ? "140px" : "100px",
+                    lineHeight: size === "large" ? "80px" : size === "medium" ? "140px" : "110px",
                     paddingLeft: "25px",
-                    marginTop: type === "corpo" ? "-18%" : "-5%",
+                    marginTop: type === "corpo" ? "-18%" : "-10%",
                 }}
             >
                 {type === "titulo" && (

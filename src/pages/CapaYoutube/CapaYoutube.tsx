@@ -1,21 +1,21 @@
-import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import html2canvas from "html2canvas";
-import JsonEditor from "@/components/JsonEditor";
-import AgendaSemanalTemplate from "@/components/AgendaSemanalTemplate/AgendaSemanalTemplate";
-import { DEFAULT_AGENDA } from "@/types/agenda";
-import { parseAgenda, convertFileToBase64 } from "@/lib/utils";
 import "./style.css";
+import React, { useState, useRef, useCallback, useMemo } from "react";
+import JsonEditor from "@/components/JsonEditor";
+import { DEFAULT_CAPA_YOUTUBE } from "@/types/capayoutube";
+import { parseYoutube, convertFileToBase64 } from "@/lib/utils";
+import html2canvas from "html2canvas";
+import CapaYoutubeTemplate from "@/components/CapaYoutubeTemplate/CapaYoutubeTemplate";
 
-const GeradorSemanal = () => {
+export const CapaYoutube = () => {
     const [jsonText, setJsonText] = useState(
-        () => localStorage.getItem("agendaData") || JSON.stringify(DEFAULT_AGENDA, null, 2),
+        () => localStorage.getItem("capaYoutubeData") || JSON.stringify(DEFAULT_CAPA_YOUTUBE, null, 2),
     );
     const [exporting, setExporting] = useState(false);
-    const [previewSize] = useState({ width: 1080, height: 1920 });
+    const [previewSize] = useState({ width: 1920, height: 1080 });
     const [base64Image, setBase64Image] = useState<string | null>(null);
 
     const previewRef = useRef<HTMLDivElement>(null);
-    const { data, error } = useMemo(() => parseAgenda(jsonText), [jsonText]);
+    const { data, error } = useMemo(() => parseYoutube(jsonText), [jsonText]);
 
     const handleExport = useCallback(async () => {
         if (!previewRef.current || !data) return;
@@ -28,7 +28,7 @@ const GeradorSemanal = () => {
                 backgroundColor: "#000000", // transparente
             });
             const link = document.createElement("a");
-            link.download = "agenda-semanal.png";
+            link.download = `capa-youtube-${data?.ministro.split(" ")[0]}.png`;
             link.href = canvas.toDataURL("image/png");
             link.click();
         } catch (err) {
@@ -39,19 +39,20 @@ const GeradorSemanal = () => {
     }, [data, previewSize]);
 
     return (
-        <div className="page-index dark min-h-screen bg-slate-900 bg-muted/40">
+        <div className="page-index min-h-screen dark bg-stone-900 bg-muted/40">
             <header className="text-center p-8">
                 <h1
                     className="text-3xl sm:text-2xl font-bold text-foreground"
                     style={{ fontFamily: "'Nunito Sans', sans-serif" }}
                 >
-                    Gerador de Agenda Semanal
+                    Gerador de Capas para YouTube
                 </h1>
                 <p className="text-sm text-muted-foreground">Edite o JSON e exporte a imagem.</p>
             </header>
 
-            <div className="gerador-container flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-sky-900 border-2 border-solid rounded-lg overflow-hidden relative">
+            <div className="gerador-container h-full flex sm:justify-center gap-6 max-w-[1600px] mx-auto p-6 border-stone-600 border-2 border-solid rounded-lg relative">
                 <div className="editor-container w-[480px] shrink-0 ">
+
                     <form>
                         <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">
                             Local background image (opcional):
@@ -64,7 +65,7 @@ const GeradorSemanal = () => {
                     </form>
 
                     <JsonEditor
-                        localStorageKey={"agendaData"}
+                        localStorageKey={"capaYoutubeData"}
                         jsonText={jsonText}
                         onJsonChange={setJsonText}
                         isValid={!!data}
@@ -74,8 +75,8 @@ const GeradorSemanal = () => {
                     />
                 </div>
 
-                <div className="preview-container flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative">
-                    <AgendaSemanalTemplate
+                <div className="preview-container flex-1 flex justify-center border-2 border-stone-600 border-solid rounded-lg overflow-hidden relative">
+                    <CapaYoutubeTemplate
                         data={data}
                         previewSize={previewSize}
                         base64Image={base64Image}
@@ -87,4 +88,4 @@ const GeradorSemanal = () => {
     );
 };
 
-export default GeradorSemanal;
+export default CapaYoutube;

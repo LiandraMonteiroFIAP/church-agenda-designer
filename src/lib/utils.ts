@@ -48,5 +48,28 @@ export function parseEstatico(text: string): { data: any | null; error: string |
     return { data: parsed, error: null };
   } catch (e: any) {
     return { data: null, error: e.message };
-  } 
+  }
+}
+
+export function convertFileToBase64(e: React.ChangeEvent<HTMLInputElement>, set: React.Dispatch<React.SetStateAction<string | null>>) {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const base64String = reader.result as string;
+    set(base64String);
+  };
+  reader.readAsDataURL(file);
+};
+
+export function parseYoutube(text: string): { data: any | null; error: string | null } {
+  try {
+    const parsed = JSON.parse(text);
+    if (!parsed.backgroundImage || typeof parsed.backgroundImage !== "string") {
+      return { data: null, error: "Campo 'backgroundImage' é obrigatório (string)." };
+    }
+    return { data: parsed, error: null };
+  } catch (e: any) {
+    return { data: null, error: e.message };
+  }
 }

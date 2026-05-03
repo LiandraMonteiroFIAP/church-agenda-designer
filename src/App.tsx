@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import GeradorSemanal from "./pages/GeradorSemanal/GeradorSemanal";
 import Estaticos from "./pages/Estaticos/Estaticos";
 import Index from "./pages/Index";
+import { CapaYoutube } from "./pages/CapaYoutube/CapaYoutube";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/agenda-semanal" element={<GeradorSemanal />} />
           <Route path="/estaticos" element={<Estaticos />} />
+          <Route path="/capa-youtube" element={<CapaYoutube />} />
           {/* <Route path="/capa-domingo" element={<Index />} /> */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
