@@ -97,7 +97,7 @@ const Estaticos = () => {
                     />
                 </div>
 
-                <div className="preview-container flex-1 border-2 border-stone-600 border-solid rounded-lg overflow-hidden relative">
+                <div className="preview-container h-screen flex-1 border-2 border-stone-600 border-solid rounded-lg overflow-hidden relative">
                     <EstaticosTemplate
                         data={data}
                         previewSize={previewSize}

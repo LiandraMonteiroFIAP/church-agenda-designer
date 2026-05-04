@@ -74,7 +74,7 @@ const GeradorSemanal = () => {
                     />
                 </div>
 
-                <div className="preview-container flex-1 border-2 border-sky-900 border-solid rounded-lg overflow-hidden relative">
+                <div className="preview-container flex-1 border-2 border-sky-900 h-screen border-solid rounded-lg overflow-hidden relative">
                     <AgendaSemanalTemplate
                         data={data}
                         previewSize={previewSize}
