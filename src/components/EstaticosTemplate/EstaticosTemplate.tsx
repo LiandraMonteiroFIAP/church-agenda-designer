@@ -80,16 +80,16 @@ const EstaticosTemplate: React.FC<EstaticosTemplateProps> = ({
               <TextoEstatico type="descricao" size="small" text={data?.descricao} />
             </div>   
 
-            {data?.ministerio === "geral" && (
-              <img className="logo" src="assets/estatico-logo.png" alt="" /> )}         
-            {data?.ministerio === "jovens" && (
-              <img className="logo" src="assets/logo-capaojovem.png" alt="" /> )}         
+            {data?.ministerio === "jovens" ? (
+              <img className="logo" src="assets/logo-capaojovem.png" alt="" /> ):
+              <img className="logo" src="assets/estatico-logo.png" alt="" />
+              }         
           </div>
 
           <div className="bolinha-container">
               <Bolinha 
                 ministerio={data?.ministerio || "geral"} 
-                tituloDoEvento={data?.titulo || ""} />
+                tituloDoEvento={data?.titulo} />
               {
                 data?.tipo === "presencial" && (
                   <div className="estatico-endereco">

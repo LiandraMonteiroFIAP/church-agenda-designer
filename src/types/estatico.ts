@@ -5,7 +5,7 @@ export interface EstaticoEvent {
   backgroundImage: string;
   ministerio: Ministerio;
   diaSemana: string;
-  titulo: string;
+  titulo: string[];
   horario: string;
   local: string;
   descricao?: string;
@@ -15,21 +15,20 @@ export interface EstaticoEvent {
 export const DEFAULT_ESTATICO: EstaticoEvent = {
   tipo: "presencial",
   ministerio: "geral",
-  backgroundImage: "../placeholders/estatico-placeholder.JPG",
+  backgroundImage: "/assets/estatico-placeholder.JPG",
   diaSemana: "Sexta",
-  titulo: "Sala de Oração",
+  titulo: ["Sala de", "Oração"],
   horario: "20:30",
   local: "Via Zoom",
-  descricao: "Um culto de oração.",
   opacidade: 0.5,
 };
 
 export const DEFAULT_FAMILIA_ORACAO: EstaticoEvent = {
   tipo: "presencial",
-  ministerio: "geral",
-  backgroundImage: "../placeholders/estatico-placeholder.JPG",
+  ministerio: "oracao",
+  backgroundImage: "/assets/estatico-placeholder.JPG",
   diaSemana: "Quarta",
-  titulo: "Família em Oração",
+  titulo: ["Família", "em Oração"],
   horario: "20:30",
   local: "Na Igreja",
   opacidade: 0.5,
@@ -38,9 +37,9 @@ export const DEFAULT_FAMILIA_ORACAO: EstaticoEvent = {
 export const DEFAULT_PF: EstaticoEvent = {
   tipo: "presencial",
   ministerio: "geral",
-  backgroundImage: "../placeholders/estatico-placeholder.JPG",
+  backgroundImage: "/assets/estatico-placeholder.JPG",
   diaSemana: "Sexta",
-  titulo: "Pequena Família",
+  titulo: ["Pequena", "Família"],
   horario: "20:30",
   local: "Nas casas",
   opacidade: 0.2,
@@ -49,9 +48,9 @@ export const DEFAULT_PF: EstaticoEvent = {
 export const DEFAULT_JOVENS: EstaticoEvent = {
   tipo: "presencial",
   ministerio: "jovens",
-  backgroundImage: "../placeholders/estatico-placeholder.JPG",
+  backgroundImage: "/assets/estatico-placeholder.JPG",
   diaSemana: "Sábado",
-  titulo: "Capão Jovem",
+  titulo: ["Capão", "Jovem"],
   horario: "18:00",
   local: "Na Igreja",
   opacidade: 0.2,

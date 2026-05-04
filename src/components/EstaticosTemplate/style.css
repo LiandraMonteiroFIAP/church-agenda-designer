@@ -41,6 +41,7 @@
     width:220px;
     height: auto;
     z-index: 1000;
+    margin-top: -20px;
 }
 
 .estatico-header{

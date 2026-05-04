@@ -68,7 +68,7 @@ const Estaticos = () => {
                                         }
                                         className={`block text-size text-center px-2 py-2 mb-2 rounded-lg border text-foreground border-stone-400 ${isSelected ? "bg-stone-700" : "hover:bg-stone-700"}`}
                                     >
-                                        {template.titulo}
+                                        {template.titulo.map(word => word).join(" ")}
                                     </button>
                                 );
                             })}

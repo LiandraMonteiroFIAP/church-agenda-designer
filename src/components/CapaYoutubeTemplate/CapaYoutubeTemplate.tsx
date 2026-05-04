@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import type { CapaYoutubeData } from "@/types/capayoutube";
 import { FooterPNG } from "../static-ui/Footer";
 import { CircularText } from "../static-ui/CircularText";
-import { TextoEstatico } from "../static-ui/TextoEstatico";
 
 interface CapaYoutubeTemplateProps {
   data: CapaYoutubeData | null;
