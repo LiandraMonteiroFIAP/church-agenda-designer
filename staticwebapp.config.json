@@ -1,8 +1,29 @@
 {
-  "routes": [
-    {
-      "route": "/agenda-semanal",
-      "redirect": "/agenda-semanal"
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/assets/*",
+      "/*.css",
+      "/*.js",
+      "/*.png",
+      "/*.jpg",
+      "/*.jpeg",
+      "/*.gif",
+      "/*.svg",
+      "/*.ico",
+      "/favicon.ico"
+    ]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
     }
-  ]
+  },
+  "mimeTypes": {
+    ".json": "text/json"
+  },
+  "globalHeaders": {
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff"
+  }
 }
