@@ -1,7 +1,8 @@
 {
   "routes": [
     {
-      "route": "/agenda-semanal"
+      "route": "/agenda-semanal",
+      "redirect": "/agenda-semanal"
     }
   ]
 }
