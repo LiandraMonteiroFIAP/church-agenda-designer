@@ -3,9 +3,9 @@ import type { MonthlyAgenda } from "@/types/monthly";
 import { monthInfo } from "@/types/monthly";
 import "./style.css";
 
-type Props = { data: MonthlyAgenda; storyRef: RefObject<HTMLDivElement>; scale: number };
+type Props = { data: MonthlyAgenda; storyRef: RefObject<HTMLDivElement> };
 
-export function MonthlyStory({ data, storyRef, scale }: Props) {
+export function MonthlyStory({ data, storyRef }: Props) {
   const { year, monthNumber, firstWeekday, days, name } = monthInfo(data.mes);
   const rows = Math.ceil((firstWeekday + days) / 7);
   const weekly = data.eventos.filter(ev => ev.tipo === "semanal");
@@ -26,7 +26,7 @@ export function MonthlyStory({ data, storyRef, scale }: Props) {
   });
 
   return (
-    <div className="monthly-story" ref={storyRef} style={{ transform: `scale(${scale})` }}>
+    <div className="monthly-story" ref={storyRef}>
       <div className="monthly-arc monthly-arc--left" />
       <div className="monthly-arc monthly-arc--right" />
       <div className="monthly-content">
