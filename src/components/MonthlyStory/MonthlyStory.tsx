@@ -1,0 +1,68 @@
+import type { RefObject } from "react";
+import type { MonthlyAgenda } from "@/types/monthly";
+import { monthInfo } from "@/types/monthly";
+import "./style.css";
+
+type Props = { data: MonthlyAgenda; storyRef: RefObject<HTMLDivElement>; scale: number };
+
+export function MonthlyStory({ data, storyRef, scale }: Props) {
+  const { year, monthNumber, firstWeekday, days, name } = monthInfo(data.mes);
+  const rows = Math.ceil((firstWeekday + days) / 7);
+  const weekly = data.eventos.filter(ev => ev.tipo === "semanal");
+  const specials = data.eventos.filter(ev => ev.tipo === "especial");
+  const cells = Array.from({ length: rows * 7 }, (_, index) => {
+    const day = index - firstWeekday + 1;
+    if (day < 1 || day > days) return <div className="monthly-day" key={index} />;
+    const weekday = index % 7;
+    const date = `${year}-${String(monthNumber).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const recurring = weekly.filter(ev => ev.diaSemana === weekday);
+    const special = specials.find(ev => ev.datas?.includes(date));
+    return (
+      <div className={`monthly-day${weekday === 0 || weekday === 6 ? " monthly-day--weekend" : ""}`} key={index}>
+        <span className="monthly-day-number" style={special ? { backgroundColor: special.cor } : undefined}>{day}</span>
+        {recurring.length > 0 && <div className="monthly-markers">{recurring.map((ev, i) => <span key={i} style={{ backgroundColor: ev.cor }} />)}</div>}
+      </div>
+    );
+  });
+
+  return (
+    <div className="monthly-story" ref={storyRef} style={{ transform: `scale(${scale})` }}>
+      <div className="monthly-arc monthly-arc--left" />
+      <div className="monthly-arc monthly-arc--right" />
+      <div className="monthly-content">
+        <div className="monthly-heading">
+          <img src="/assets/estatico-logo.png" alt="Família Capão" />
+          <div><strong>{name}</strong><span>na Família Capão</span></div>
+        </div>
+
+        <div className="monthly-calendar" style={{ gridTemplateRows: `72px repeat(${rows}, 1fr)` }}>
+          {Array.from("DSTQQSS").map((label, i) => <div className="monthly-weekday" key={i}>{label}</div>)}
+          {cells}
+        </div>
+
+        <div className="monthly-legends">
+          <section>
+            <h2>Eventos Semanais</h2>
+            {weekly.map((ev, i) => (
+              <div className="monthly-legend-item" key={i}>
+                <span className="monthly-legend-line" style={{ backgroundColor: ev.cor }} />
+                <span>{["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"][ev.diaSemana ?? 0]} – {ev.titulo}</span>
+              </div>
+            ))}
+          </section>
+          <section>
+            <h2>Eventos Especiais</h2>
+            {specials.map((ev, i) => (
+              <div className="monthly-legend-item monthly-legend-item--special" key={i}>
+                <span className="monthly-legend-circle" style={{ backgroundColor: ev.cor }}>{ev.datas?.map(date => Number(date.slice(-2))).join(", ")}</span>
+                <span>{ev.titulo}</span>
+              </div>
+            ))}
+          </section>
+        </div>
+      </div>
+      <div className="monthly-arc monthly-arc--bottom" />
+      <img className="monthly-footer-logo" src="/assets/estatico-logo.png" alt="Família Capão" />
+    </div>
+  );
+}
