@@ -26,7 +26,7 @@
 .monthly-calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); width: 860px; height: 700px; border: 2px solid hsl(var(--monthly-rule-token)); border-radius: 52px; padding: 25px 24px 35px; }
 .monthly-weekday { display: flex; align-items: flex-start; justify-content: center; color: hsl(var(--monthly-gray-token)); font-size: 32px; font-weight: 800; }
 .monthly-day { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-width: 0; }
-.monthly-day-number { display: flex; justify-content: center; align-items: center; min-width: 58px; height: 58px; padding: 0 3px; border-radius: 50%; color: hsl(var(--monthly-gray-token)); font-size: 38px; font-weight: 900; line-height: 1; }
+.monthly-day-number { display: flex; justify-content: center; align-items: center; min-width: 58px; height: 58px; padding: 0 3px 6px; border-radius: 50%; color: hsl(var(--monthly-gray-token)); font-size: 38px; font-weight: 900; line-height: 1; }
 .monthly-day--weekend .monthly-day-number { color: hsl(var(--monthly-weekend-token)); }
 .monthly-markers { height: 8px; display: flex; gap: 3px; justify-content: center; }
 .monthly-markers span { display: block; width: 45px; height: 8px; border-radius: 8px; }
@@ -35,5 +35,6 @@
 .monthly-legends h2 { margin: 0 0 11px; font-size: 27px; font-weight: 900; }
 .monthly-legend-item { display: flex; align-items: baseline; gap: 11px; margin-bottom: 5px; }
 .monthly-legend-line { flex: 0 0 40px; height: 8px; border-radius: 8px; align-self: center; }
-.monthly-legend-circle { flex: 0 0 auto; min-width: 33px; height: 33px; padding: 0 3px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; white-space: nowrap; }
+.monthly-legend-dates { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto; }
+.monthly-legend-circle { flex: 0 0 auto; min-width: 33px; height: 33px; padding: 0 3px 3px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; white-space: nowrap; }
 .monthly-footer-logo { position: absolute; bottom: 55px; right: 67px; width: 140px; opacity: .72; }

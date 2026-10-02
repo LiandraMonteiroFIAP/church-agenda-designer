@@ -54,7 +54,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
             <h2>Eventos Especiais</h2>
             {specials.map((ev, i) => (
               <div className="monthly-legend-item monthly-legend-item--special" key={i}>
-                <span className="monthly-legend-circle" style={{ backgroundColor: ev.cor }}>{ev.datas?.map(date => Number(date.slice(-2))).join(", ")}</span>
+                <span className="monthly-legend-dates">{ev.datas?.map(date => <span className="monthly-legend-circle" style={{ backgroundColor: ev.cor }} key={date}>{Number(date.slice(-2))}</span>)}</span>
                 <span>{ev.titulo}</span>
               </div>
             ))}
