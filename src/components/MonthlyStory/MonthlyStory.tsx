@@ -19,7 +19,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
     const special = specials.find(ev => ev.datas?.includes(date));
     return (
       <div className={`monthly-day${weekday === 0 || weekday === 6 ? " monthly-day--weekend" : ""}`} key={index}>
-        <span className="monthly-day-number" style={special ? { backgroundColor: special.cor } : undefined}>{day}</span>
+        <span className="monthly-day-number" style={special ? { backgroundColor: special.cor, color: special.corTexto } : undefined}>{day}</span>
         {recurring.length > 0 && <div className="monthly-markers">{recurring.map((ev, i) => <span key={i} style={{ backgroundColor: ev.cor }} />)}</div>}
       </div>
     );
@@ -31,7 +31,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
       <div className="monthly-arc monthly-arc--right" />
       <div className="monthly-content">
         <div className="monthly-heading">
-          <img src="/assets/monthly-logo.png" alt="Família Capão" />
+          <img src="/assets/logo-arvore.png" alt="Família Capão" />
           <div><strong>{name}</strong><span>na Família Capão</span></div>
         </div>
 

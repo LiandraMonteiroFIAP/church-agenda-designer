@@ -2,6 +2,7 @@ export type MonthlyEvent = {
   titulo: string;
   tipo: "semanal" | "especial";
   cor: string;
+  corTexto: string;
   diaSemana?: number;
   datas?: string[];
 };
@@ -14,13 +15,13 @@ export type MonthlyAgenda = {
 export const DEFAULT_MONTHLY: MonthlyAgenda = {
   mes: "2026-10",
   eventos: [
-    { titulo: "Culto da Família", tipo: "semanal", diaSemana: 0, cor: "#3095d5" },
-    { titulo: "Sala de Oração", tipo: "semanal", diaSemana: 1, cor: "#38aa5b" },
-    { titulo: "Família em Oração", tipo: "semanal", diaSemana: 3, cor: "#f05c31" },
-    { titulo: "Pequena Família", tipo: "semanal", diaSemana: 5, cor: "#f7b13e" },
-    { titulo: "Capão Jovem", tipo: "especial", datas: ["2026-10-03", "2026-10-17"], cor: "#dba8e8" },
-    { titulo: "Encontro de Casais", tipo: "especial", datas: ["2026-10-24"], cor: "#dba8e8" },
-    { titulo: "Conferência Geral de Mulheres", tipo: "especial", datas: ["2026-10-31"], cor: "#dba8e8" },
+    { titulo: "Culto da Família", tipo: "semanal", diaSemana: 0, cor: "#3095d5", corTexto: "#000000" },
+    { titulo: "Sala de Oração", tipo: "semanal", diaSemana: 1, cor: "#38aa5b", corTexto: "#000000" },
+    { titulo: "Família em Oração", tipo: "semanal", diaSemana: 3, cor: "#f05c31", corTexto: "#000000" },
+    { titulo: "Pequena Família", tipo: "semanal", diaSemana: 5, cor: "#f7b13e", corTexto: "#000000" },
+    { titulo: "Capão Jovem", tipo: "especial", datas: ["2026-10-03", "2026-10-17"], cor: "#dba8e8", corTexto: "#000000" },
+    { titulo: "Encontro de Casais", tipo: "especial", datas: ["2026-10-24"], cor: "#dba8e8", corTexto: "#000000" },
+    { titulo: "Conferência Geral de Mulheres", tipo: "especial", datas: ["2026-10-31"], cor: "#dba8e8", corTexto: "#000000" },
   ],
 };
 
