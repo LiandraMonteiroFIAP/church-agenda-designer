@@ -31,7 +31,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
       <div className="monthly-arc monthly-arc--right" />
       <div className="monthly-content">
         <div className="monthly-heading">
-          <img src="/assets/estatico-logo.png" alt="Família Capão" />
+          <img src="/assets/monthly-logo.png" alt="Família Capão" />
           <div><strong>{name}</strong><span>na Família Capão</span></div>
         </div>
 
@@ -62,7 +62,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
         </div>
       </div>
       <div className="monthly-arc monthly-arc--bottom" />
-      <img className="monthly-footer-logo" src="/assets/estatico-logo.png" alt="Família Capão" />
+      <img className="monthly-footer-logo" src="/assets/monthly-logo.png" alt="Família Capão" />
     </div>
   );
 }

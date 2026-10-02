@@ -19,7 +19,7 @@
 .monthly-arc--bottom { width: 950px; height: 540px; bottom: -390px; left: -330px; border-radius: 50%; background: hsl(var(--monthly-earth-token)); }
 .monthly-content { position: relative; z-index: 1; padding: 395px 110px 0; }
 .monthly-heading { height: 205px; display: flex; align-items: center; gap: 24px; justify-content: center; }
-.monthly-heading img { width: 112px; height: auto; filter: brightness(0); }
+.monthly-heading img { width: 112px; height: auto; }
 .monthly-heading div { display: flex; flex-direction: column; line-height: 1.02; white-space: nowrap; }
 .monthly-heading strong { font-family: 'Quicksand', sans-serif; font-size: 77px; font-weight: 800; }
 .monthly-heading span { font-family: 'Quicksand', sans-serif; font-size: 54px; font-weight: 500; }
@@ -36,4 +36,4 @@
 .monthly-legend-item { display: flex; align-items: baseline; gap: 11px; margin-bottom: 5px; }
 .monthly-legend-line { flex: 0 0 40px; height: 8px; border-radius: 8px; align-self: center; }
 .monthly-legend-circle { flex: 0 0 auto; min-width: 33px; height: 33px; padding: 0 3px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; white-space: nowrap; }
-.monthly-footer-logo { position: absolute; bottom: 55px; right: 67px; width: 140px; filter: brightness(0); opacity: .72; }
+.monthly-footer-logo { position: absolute; bottom: 55px; right: 67px; width: 140px; opacity: .72; }
