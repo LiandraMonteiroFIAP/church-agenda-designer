@@ -12,6 +12,12 @@ const Index = () => {
                     Agenda Semanal
                 </a>
                 <a
+                    href="/agenda-mensal"
+                    className="mt-4 inline-block rounded bg-white px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-100"
+                >
+                    Agenda Mensal
+                </a>
+                <a
                     href="/estaticos"
                     className="mt-4 inline-block rounded bg-white px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-100"
                 >

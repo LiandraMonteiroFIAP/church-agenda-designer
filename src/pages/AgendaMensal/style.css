@@ -1,0 +1,16 @@
+.monthly-page { --monthly-paper-token: 30 70% 97%; --monthly-cloud-token: 197 12% 87%; --monthly-ink-token: 0 0% 7%; --monthly-deep-token: 203 54% 27%; --monthly-blue-token: 207 95% 34%; --monthly-earth-token: 36 18% 42%; --monthly-rule-token: 0 0% 42%; --monthly-gray-token: 0 0% 34%; --monthly-weekend-token: 0 0% 66%; min-height: 100vh; background: hsl(var(--background)); color: hsl(var(--foreground)); }
+.monthly-page-header { max-width: 1480px; margin: auto; padding: 34px 30px 24px; display: flex; align-items: center; gap: 18px; }
+.monthly-page-header h1 { font-family: 'Quicksand', sans-serif; font-size: 30px; line-height: 1.2; font-weight: 700; }
+.monthly-page-header p { color: hsl(var(--muted-foreground)); font-size: 14px; margin-top: 4px; }
+.monthly-back { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid hsl(var(--border)); border-radius: 6px; flex-shrink: 0; }
+.monthly-back:hover { background: hsl(var(--accent)); }
+.monthly-workspace { max-width: 1480px; margin: 0 auto; padding: 0 30px 40px; display: grid; grid-template-columns: minmax(360px, 480px) minmax(0, 1fr); gap: 28px; }
+.monthly-editor { min-width: 0; }
+.monthly-editor .json-editor-container textarea { min-height: 575px !important; }
+.monthly-preview-panel { min-width: 0; }
+.monthly-preview-label { font-size: 13px; font-weight: 600; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.monthly-preview-container { position: relative; width: 100%; height: 720px; overflow: hidden; background: hsl(var(--muted)); border: 1px solid hsl(var(--border)); border-radius: 6px; }
+.monthly-story-scale { position: relative; }
+.monthly-invalid { display: grid; place-items: center; height: 720px; padding: 20px; text-align: center; color: hsl(var(--muted-foreground)); }
+@media (max-width: 850px) { .monthly-workspace { grid-template-columns: 1fr; } .monthly-preview-container { min-height: min(720px, 177.78vw); height: min(720px, 177.78vw); } }
+@media (max-width: 520px) { .monthly-page-header { padding: 24px 16px; } .monthly-workspace { padding: 0 16px 32px; gap: 30px; } .monthly-editor .json-editor-container textarea { min-height: 400px !important; } }
