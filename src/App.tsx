@@ -9,28 +9,32 @@ import Estaticos from "./pages/Estaticos/Estaticos";
 import Index from "./pages/Index";
 import { CapaYoutube } from "./pages/CapaYoutube/CapaYoutube";
 import AgendaMensal from "./pages/AgendaMensal/AgendaMensal";
+import { ThemeProvider, ThemeToggle } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/agenda-semanal" element={<GeradorSemanal />} />
-          <Route path="/agenda-mensal" element={<AgendaMensal />} />
-          <Route path="/estaticos" element={<Estaticos />} />
-          <Route path="/capa-youtube" element={<CapaYoutube />} />
-          {/* <Route path="/capa-domingo" element={<Index />} /> */}
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <ThemeToggle />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/agenda-semanal" element={<GeradorSemanal />} />
+            <Route path="/agenda-mensal" element={<AgendaMensal />} />
+            <Route path="/estaticos" element={<Estaticos />} />
+            <Route path="/capa-youtube" element={<CapaYoutube />} />
+            {/* <Route path="/capa-domingo" element={<Index />} /> */}
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

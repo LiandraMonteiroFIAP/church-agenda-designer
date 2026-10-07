@@ -1,4 +1,5 @@
-type Ministerio = "geral" | "casais" | "kids" | "jovens" | "mulheres" | "homens" | "oracao" | "alternativo";
+export type Ministerio = "geral" | "casais" | "kids" | "jovens" | "mulheres" | "homens" | "oracao" | "alternativo";
+export const MINISTERIOS: Ministerio[] = ["geral", "casais", "kids", "jovens", "mulheres", "homens", "oracao", "alternativo"];
 
 export interface EstaticoEvent {
   tipo: "online" | "presencial";

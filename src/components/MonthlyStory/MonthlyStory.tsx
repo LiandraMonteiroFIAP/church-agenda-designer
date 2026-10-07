@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import type { MonthlyAgenda } from "@/types/monthly";
-import { monthInfo, monthlyDayEvents, monthlyOutlineColor } from "@/types/monthly";
+import { monthInfo, monthlyDayEvents, monthlyEventColor, monthlyOutlineColor } from "@/types/monthly";
 import "./style.css";
 
 type Props = { data: MonthlyAgenda; storyRef: RefObject<HTMLDivElement> };
@@ -28,17 +28,17 @@ export function MonthlyStory({ data, storyRef }: Props) {
             >
                 {special && (
                     <div
-                        style={{ backgroundColor: special.cor, color: special.corTexto }}
+                        style={{ backgroundColor: monthlyEventColor(special), color: special.corTexto }}
                         className="monthly-day-circle"
                     ></div>
                 )}
-                {outlined && <div className="monthly-day-outline" style={{ borderColor: monthlyOutlineColor(outlined.cor) }} />}
+                {outlined && <div className="monthly-day-outline" style={{ borderColor: monthlyOutlineColor(outlined.cor, outlined.corContorno) }} />}
                 <span className="monthly-day-number" style={special?.corTexto ? { color: special.corTexto } : undefined}>{day}</span>
                 {observations.length > 0 && <span className="monthly-day-asterisk" title={observations.map(ev => ev.observacao).join("; ")} aria-label="Data com observação">*</span>}
                 {recurring.length > 0 && (
                     <div className="monthly-markers">
                         {recurring.map((ev, i) => (
-                            <span key={i} style={{ backgroundColor: ev.cor }} />
+                            <span key={i} style={{ backgroundColor: monthlyEventColor(ev) }} />
                         ))}
                     </div>
                 )}
@@ -80,7 +80,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
                             <div className="monthly-legend-item" key={i}>
                                 <span
                                     className="monthly-legend-line"
-                                    style={{ backgroundColor: ev.temContorno ? monthlyOutlineColor(ev.cor) : ev.cor }}
+                                    style={{ backgroundColor: ev.temContorno ? monthlyOutlineColor(ev.cor, ev.corContorno) : monthlyEventColor(ev) }}
                                 />
                                 <span>
                                     {
@@ -106,7 +106,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
                                         <div className="monthly-legend-dates-container" key={date}>
                                             <div
                                                 className="monthly-legend-circle"
-                                                style={{ backgroundColor: ev.cor, borderColor: ev.temContorno ? monthlyOutlineColor(ev.cor) : undefined }}
+                                                style={{ backgroundColor: monthlyEventColor(ev), borderColor: ev.temContorno ? monthlyOutlineColor(ev.cor, ev.corContorno) : undefined }}
                                                 data-outlined={ev.temContorno || undefined}
                                             ></div>
                                             <span className="monthly-legend" style={ev.corTexto ? { color: ev.corTexto } : undefined}>

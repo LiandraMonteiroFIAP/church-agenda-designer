@@ -6,6 +6,8 @@ export type MonthlyEvent = {
   diaSemana?: number;
   datas?: string[];
   temContorno?: boolean;
+  corContorno?: string;
+  transparencia?: number;
   excecoes?: string[];
   observacao?: string;
 };
@@ -44,10 +46,27 @@ export function monthlyDayEvents(data: MonthlyAgenda, date: string, weekday: num
     : ev.datas?.includes(date));
 }
 
-export function monthlyOutlineColor(color: string) {
+export function monthlyEventColor(event: Pick<MonthlyEvent, "cor" | "transparencia">) {
+  const channels = [1, 3, 5].map(start => parseInt(event.cor.slice(start, start + 2), 16));
+  const alpha = 1 - Math.max(0, Math.min(100, event.transparencia ?? 0)) / 100;
+  return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
+}
+
+export function monthlyOutlineColor(color: string, customColor?: string) {
+  if (customColor) return customColor;
   const channels = [1, 3, 5].map(start => parseInt(color.slice(start, start + 2), 16) / 255);
   const lightness = (Math.max(...channels) + Math.min(...channels)) / 2;
   return `hsl(285, 42%, ${Math.max(20, Math.min(65, lightness * 100 - 18))}%)`;
+}
+
+export function monthlyDefaultOutlineHex(color: string) {
+  const channels = [1, 3, 5].map(start => parseInt(color.slice(start, start + 2), 16) / 255);
+  const lightness = Math.max(20, Math.min(65, ((Math.max(...channels) + Math.min(...channels)) / 2) * 100 - 18)) / 100;
+  const saturation = 0.42;
+  const chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
+  const x = chroma * 0.75;
+  const match = lightness - chroma / 2;
+  return `#${[match, match + x, match + chroma].map(value => Math.round(value * 255).toString(16).padStart(2, "0")).join("")}`;
 }
 
 export function parseMonthly(text: string): { data: MonthlyAgenda | null; error: string | null } {
@@ -71,6 +90,8 @@ export function parseMonthly(text: string): { data: MonthlyAgenda | null; error:
       if (ev.tipo !== "semanal" && ev.tipo !== "especial") return { data: null, error: prefix + "'tipo' deve ser 'semanal' ou 'especial'." };
       if (typeof ev.cor !== "string" || !colorPattern.test(ev.cor)) return { data: null, error: prefix + "'cor' deve ser hexadecimal, como #3095d5." };
       if (ev.temContorno !== undefined && typeof ev.temContorno !== "boolean") return { data: null, error: prefix + "'temContorno' deve ser true ou false." };
+      if (ev.corContorno !== undefined && (typeof ev.corContorno !== "string" || !colorPattern.test(ev.corContorno))) return { data: null, error: prefix + "'corContorno' deve ser hexadecimal, como #3095d5." };
+      if (ev.transparencia !== undefined && (typeof ev.transparencia !== "number" || !Number.isFinite(ev.transparencia) || ev.transparencia < 0 || ev.transparencia > 100)) return { data: null, error: prefix + "'transparencia' deve ser um número entre 0 e 100." };
       if (ev.observacao !== undefined && typeof ev.observacao !== "string") return { data: null, error: prefix + "'observacao' deve ser um texto." };
       if (ev.excecoes !== undefined && (ev.tipo !== "semanal" || !Array.isArray(ev.excecoes) || ev.excecoes.some(d => !isMonthlyDate(d, agenda.mes as string)))) {
         return { data: null, error: prefix + "'excecoes' deve ser uma lista de datas válidas do mês (AAAA-MM-DD), apenas para eventos semanais." };

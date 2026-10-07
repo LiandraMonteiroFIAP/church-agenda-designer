@@ -1,8 +1,10 @@
+export type CapaMinisterio = "geral" | "jovens";
+
 export interface CapaYoutubeData {
   backgroundImage: string;
   ministro: string;
   titulo: string[];
-  ministerio: "geral" | "jovens";
+  ministerio: CapaMinisterio;
   opacidade?: number;
   cor?: string;
 }
