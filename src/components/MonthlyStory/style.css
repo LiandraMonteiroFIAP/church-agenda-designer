@@ -121,6 +121,27 @@
     height: 58px;
     top: 5px;
 }
+.monthly-day-outline {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    top: 0;
+    border: 4px solid;
+    border-radius: 50%;
+}
+.monthly-day-asterisk {
+    position: absolute;
+    top: -8px;
+    left: calc(50% + 31px);
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1;
+}
+.monthly-legend-circle[data-outlined] {
+    outline: 3px solid;
+    outline-color: inherit;
+    border: 3px solid;
+}
 .monthly-markers {
     position: relative;
     height: 8px;
