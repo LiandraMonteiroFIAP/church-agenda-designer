@@ -138,8 +138,6 @@
     line-height: 1;
 }
 .monthly-legend-circle[data-outlined] {
-    outline: 3px solid;
-    outline-color: inherit;
     border: 3px solid;
 }
 .monthly-markers {
