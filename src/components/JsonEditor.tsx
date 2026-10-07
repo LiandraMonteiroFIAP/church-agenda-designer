@@ -33,11 +33,31 @@ const JsonEditor: React.FC<JsonEditorProps> = ({
     }
   }, [jsonText]);
 
+  function formatarJson() {
+    try {
+      const parsed = JSON.parse(jsonText);
+      onJsonChange(JSON.stringify(parsed, null, 2));
+    } catch (e) {
+      console.error("Erro ao formatar JSON:", e);
+    }
+  }
+
   return (
     <div className="json-editor-container flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold font-[Quicksand] text-foreground">Editor JSON</h2>
         <div className="flex items-center gap-2">
+          <Button
+            onClick={formatarJson}
+            disabled={!isValid}
+            variant="outline"
+            size="sm"
+            className="gap-1.5"
+            title={isValid ? "Reformatar o JSON com indentação" : "Corrija o JSON antes de formatar"}
+          >
+            <Wand2 className="w-4 h-4" />
+            Formatar
+          </Button>
           {isValid ? (
             <span className="flex items-center gap-1 text-sm text-green-600">
               <CheckCircle2 className="w-4 h-4 text-green-600" /> Válido
