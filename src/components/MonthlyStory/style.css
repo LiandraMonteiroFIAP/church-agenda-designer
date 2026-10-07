@@ -1,39 +1,212 @@
 .monthly-story {
-  --monthly-ink: hsl(var(--monthly-ink-token));
-  --monthly-paper: hsl(var(--monthly-paper-token));
-  --monthly-cloud: hsl(var(--monthly-cloud-token));
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top left;
-  width: 1080px;
-  height: 1920px;
-  overflow: hidden;
-  color: var(--monthly-ink);
-  background: linear-gradient(168deg, var(--monthly-paper) 15%, var(--monthly-cloud) 95%);
-  font-family: 'Nunito Sans', sans-serif;
+    --monthly-ink: hsl(var(--monthly-ink-token));
+    --monthly-paper: hsl(var(--monthly-paper-token));
+    --monthly-cloud: hsl(var(--monthly-cloud-token));
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    color: var(--monthly-ink);
+    background: linear-gradient(168deg, var(--monthly-paper) 15%, var(--monthly-cloud) 95%);
+    font-family: "DM Sans", sans-serif;
 }
-.monthly-arc { position: absolute; pointer-events: none; }
-.monthly-arc--left { width: 850px; height: 560px; left: -290px; top: -230px; border-radius: 50%; background: hsl(var(--monthly-deep-token)); }
-.monthly-arc--right { width: 800px; height: 460px; right: -145px; top: -240px; border-radius: 50%; background: hsl(var(--monthly-blue-token)); }
-.monthly-arc--bottom { width: 950px; height: 540px; bottom: -390px; left: -330px; border-radius: 50%; background: hsl(var(--monthly-earth-token)); }
-.monthly-content { position: relative; z-index: 1; padding: 395px 110px 0; }
-.monthly-heading { height: 205px; display: flex; align-items: center; gap: 24px; justify-content: center; }
-.monthly-heading img { width: 112px; height: auto; }
-.monthly-heading div { display: flex; flex-direction: column; line-height: 1.02; white-space: nowrap; }
-.monthly-heading strong { font-family: 'Quicksand', sans-serif; font-size: 77px; font-weight: 800; }
-.monthly-heading span { font-family: 'Quicksand', sans-serif; font-size: 54px; font-weight: 500; }
-.monthly-calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); width: 860px; height: 700px; border: 2px solid hsl(var(--monthly-rule-token)); border-radius: 52px; padding: 25px 24px 35px; }
-.monthly-weekday { display: flex; align-items: flex-start; justify-coxntent: center; color: hsl(var(--monthly-gray-token)); font-size: 32px; font-weight: 800; }
-.monthly-day { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-width: 0; }
-.monthly-day-number { display: flex; justify-content: center; align-items: center; min-width: 58px; height: 58px; padding: 0 3px 6px; border-radius: 50%; font-size: 38px; font-weight: 900; line-height: 1; }
-.monthly-markers { height: 8px; display: flex; gap: 3px; justify-content: center; }
-.monthly-markers span { display: block; width: 45px; height: 8px; border-radius: 8px; }
-.monthly-markers span:nth-child(n+2) { width: 15px; }
-.monthly-legends { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin: 28px 27px 0; font-size: 25px; font-weight: 800; line-height: 1.12; }
-.monthly-legends h2 { margin: 0 0 11px; font-size: 27px; font-weight: 900; }
-.monthly-legend-item { display: flex; align-items: baseline; gap: 11px; margin-bottom: 5px; }
-.monthly-legend-line { flex: 0 0 40px; height: 8px; border-radius: 8px; align-self: center; }
-.monthly-legend-dates { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto; }
-.monthly-legend-circle { flex: 0 0 auto; min-width: 33px; height: 33px; padding: 0 3px 3px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; white-space: nowrap; }
-.monthly-footer-logo { position: absolute; bottom: 55px; right: 67px; width: 140px; opacity: .72; }
+.monthly-arc {
+    position: absolute;
+    pointer-events: none;
+}
+.monthly-arc--left {
+    width: 850px;
+    height: 560px;
+    left: -290px;
+    top: -230px;
+    border-radius: 50%;
+    background: hsl(var(--monthly-deep-token));
+}
+.monthly-arc--right {
+    width: 800px;
+    height: 460px;
+    right: -145px;
+    top: -240px;
+    border-radius: 50%;
+    background: hsl(var(--monthly-blue-token));
+}
+.monthly-arc--bottom {
+    width: 950px;
+    height: 540px;
+    bottom: -390px;
+    left: -330px;
+    border-radius: 50%;
+    background: hsl(var(--monthly-earth-token));
+}
+.monthly-content {
+    position: relative;
+    z-index: 1;
+    padding: 395px 110px 0;
+}
+.monthly-heading {
+    height: 205px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.monthly-heading img {
+    width: 150px;
+    height: auto;
+    margin-top: 40px;
+}
+.monthly-heading div {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+    white-space: nowrap;
+}
+.monthly-heading strong {
+    font-family: "DM Sans", sans-serif;
+    font-size: 90px;
+    font-weight: 800;
+}
+.monthly-heading span {
+    font-family: "DM Sans", sans-serif;
+    font-size: 90px;
+    font-weight: 500;
+}
+.monthly-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 860px;
+    height: 700px;
+    border: 2px solid hsl(var(--monthly-rule-token));
+    border-radius: 52px;
+    padding: 25px 24px 35px;
+    margin-bottom: 30px;
+}
+.monthly-weekday {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: hsl(var(--monthly-gray-token));
+    font-size: 32px;
+    font-weight: 800;
+}
+.monthly-day {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 7px;
+    min-width: 0;
+}
+.monthly-day-number {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 58px;
+    height: 40px;
+    padding: 0 3px 6px;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 3;
+}
+.monthly-day-circle {
+    position: absolute;
+    border-radius: 1000px;
+    width: 58px;
+    height: 58px;
+    top: 5px;
+}
+.monthly-markers {
+    position: relative;
+    height: 8px;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    top: 65px;
+}
+.monthly-markers span {
+    display: block;
+    width: 45px;
+    height: 8px;
+    border-radius: 8px;
+}
+.monthly-markers span:nth-child(n + 2) {
+    width: 15px;
+}
+.monthly-legends {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
+    margin: 28px 27px 0;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.12;
+}
+.monthly-legends h2 {
+    margin: 0 0 11px;
+    font-size: 27px;
+    font-weight: 900;
+}
+.monthly-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 5px;
+}
+.monthly-legend-line {
+    flex: 0 0 40px;
+    height: 8px;
+    border-radius: 8px;
+    align-self: center;
+    margin-top: 20px;
+}
+.monthly-legend-dates {
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    display: flex;
+}
+.monthly-legend-circle {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    padding: 0 3px 3px;
+    border-radius: 18px;
+    z-index: 0;
+}
+.monthly-legend {
+    position: relative;
+    flex: 0 0 auto;
+    width: 33px;
+    height: 33px;
+    padding: 0 3px 3px;
+    border-radius: 18px;
+    margin-top: -20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    white-space: nowrap;
+}
+.monthly-legend-dates-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+.monthly-legend-item-special {
+    display: flex;
+}
+.monthly-footer-logo {
+    position: absolute;
+    bottom: 55px;
+    right: 67px;
+    width: 140px;
+    opacity: 0.72;
+}

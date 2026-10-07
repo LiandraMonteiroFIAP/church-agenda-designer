@@ -19,6 +19,7 @@ export const DEFAULT_MONTHLY: MonthlyAgenda = {
     { titulo: "Sala de Oração", tipo: "semanal", diaSemana: 1, cor: "#38aa5b", corTexto: "#000000" },
     { titulo: "Família em Oração", tipo: "semanal", diaSemana: 3, cor: "#f05c31", corTexto: "#000000" },
     { titulo: "Pequena Família", tipo: "semanal", diaSemana: 5, cor: "#f7b13e", corTexto: "#000000" },
+    { titulo: "Capão Jovem", tipo: "semanal", diaSemana: 6, cor: "#dba8e8", corTexto: "#000000" },
     { titulo: "Capão Jovem", tipo: "especial", datas: ["2026-10-03", "2026-10-17"], cor: "#dba8e8", corTexto: "#000000" },
     { titulo: "Encontro de Casais", tipo: "especial", datas: ["2026-10-24"], cor: "#dba8e8", corTexto: "#000000" },
     { titulo: "Conferência Geral de Mulheres", tipo: "especial", datas: ["2026-10-31"], cor: "#dba8e8", corTexto: "#000000" },
