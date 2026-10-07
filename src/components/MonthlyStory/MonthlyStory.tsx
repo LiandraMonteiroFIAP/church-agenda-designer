@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import type { MonthlyAgenda } from "@/types/monthly";
-import { monthInfo } from "@/types/monthly";
+import { monthInfo, monthlyDayEvents, monthlyOutlineColor } from "@/types/monthly";
 import "./style.css";
 
 type Props = { data: MonthlyAgenda; storyRef: RefObject<HTMLDivElement> };
@@ -15,12 +15,16 @@ export function MonthlyStory({ data, storyRef }: Props) {
         if (day < 1 || day > days) return <div className="monthly-day" key={index} />;
         const weekday = index % 7;
         const date = `${year}-${String(monthNumber).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-        const recurring = weekly.filter((ev) => ev.diaSemana === weekday);
-        const special = specials.find((ev) => ev.datas?.includes(date));
+        const active = monthlyDayEvents(data, date, weekday);
+        const recurring = active.filter(ev => ev.tipo === "semanal" && !ev.temContorno);
+        const special = active.find(ev => ev.tipo === "especial");
+        const outlined = active.find(ev => ev.temContorno);
+        const observations = active.filter(ev => ev.observacao?.trim());
         return (
             <div
                 className={`monthly-day${weekday === 0 || weekday === 6 ? " monthly-day--weekend" : ""}`}
                 key={index}
+                data-date={date}
             >
                 {special && (
                     <div
@@ -28,7 +32,9 @@ export function MonthlyStory({ data, storyRef }: Props) {
                         className="monthly-day-circle"
                     ></div>
                 )}
-                <span className="monthly-day-number">{day}</span>
+                {outlined && <div className="monthly-day-outline" style={{ borderColor: monthlyOutlineColor(outlined.cor) }} />}
+                <span className="monthly-day-number" style={special?.corTexto ? { color: special.corTexto } : undefined}>{day}</span>
+                {observations.length > 0 && <span className="monthly-day-asterisk" title={observations.map(ev => ev.observacao).join("; ")} aria-label="Data com observação">*</span>}
                 {recurring.length > 0 && (
                     <div className="monthly-markers">
                         {recurring.map((ev, i) => (
@@ -74,7 +80,7 @@ export function MonthlyStory({ data, storyRef }: Props) {
                             <div className="monthly-legend-item" key={i}>
                                 <span
                                     className="monthly-legend-line"
-                                    style={{ backgroundColor: ev.cor }}
+                                    style={{ backgroundColor: ev.temContorno ? monthlyOutlineColor(ev.cor) : ev.cor }}
                                 />
                                 <span>
                                     {
@@ -97,12 +103,13 @@ export function MonthlyStory({ data, storyRef }: Props) {
                             >
                                 <span className="monthly-legend-dates">
                                     {ev.datas?.map((date) => (
-                                        <div className="monthly-legend-dates-container">
+                                        <div className="monthly-legend-dates-container" key={date}>
                                             <div
                                                 className="monthly-legend-circle"
-                                                style={{ backgroundColor: ev.cor }}
+                                                style={{ backgroundColor: ev.cor, borderColor: ev.temContorno ? monthlyOutlineColor(ev.cor) : undefined }}
+                                                data-outlined={ev.temContorno || undefined}
                                             ></div>
-                                            <span className="monthly-legend" key={date}>
+                                            <span className="monthly-legend" style={ev.corTexto ? { color: ev.corTexto } : undefined}>
                                                 {Number(date.slice(-2))}
                                             </span>
                                         </div>
